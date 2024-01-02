@@ -44,9 +44,9 @@ def main():
 TOKEN, PORT, IS_HTTP = get_credential()
 logging.info(f"Found TOKEN: {TOKEN} and PORT: {PORT} and IS HTTP: {IS_HTTP}")
 logging.info(f"Running with hostname: {socket.gethostname()}")
-schema = "https"
 if IS_HTTP:
-    schema = "http"
-listener = ngrok.forward(PORT, authtoken=TOKEN, schema=schema)
+    listener = ngrok.forward(PORT, authtoken=TOKEN, schemes=["http"])
+else:
+    listener = ngrok.forward(PORT, authtoken=TOKEN, schemes=["https"])
 update_interval = 15 * 60
 main()
