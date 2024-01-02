@@ -19,12 +19,14 @@ if not firebase_admin._apps:
 def get_credential():
     path = f"/credentials/ngrok/SETUP_TOKEN_{socket.gethostname().upper()}"
     data = db.reference(path).get()
-    default_return = "", 80, False
+    default_return = "", 80, False, ""
     if data is None:
         return default_return
     if "TOKEN" not in data or "PORT" not in data or "IS_HTTP" not in data:
         return default_return
-    return data["TOKEN"], data["PORT"], data["IS_HTTP"]
+    if "STATIC_DOMAIN" not in data:
+        return data["TOKEN"], data["PORT"], data["IS_HTTP"], ""
+    return data["TOKEN"], data["PORT"], data["IS_HTTP"], data["STATIC_DOMAIN"]
 
 
 def update_public_url():
@@ -41,12 +43,12 @@ def main():
             logging.error(traceback.TracebackException.msg)
 
 
-TOKEN, PORT, IS_HTTP = get_credential()
+TOKEN, PORT, IS_HTTP, STATIC_DOMAIN = get_credential()
 logging.info(f"Found TOKEN: {TOKEN} and PORT: {PORT} and IS HTTP: {IS_HTTP}")
 logging.info(f"Running with hostname: {socket.gethostname()}")
 if IS_HTTP:
-    listener = ngrok.forward(PORT, authtoken=TOKEN, schemes=["http"])
+    listener = ngrok.forward(PORT, authtoken=TOKEN, schemes=["http"], domain=STATIC_DOMAIN)
 else:
-    listener = ngrok.forward(PORT, authtoken=TOKEN, schemes=["https"])
+    listener = ngrok.forward(PORT, authtoken=TOKEN, schemes=["https"], domain=STATIC_DOMAIN)
 update_interval = 15 * 60
 main()
