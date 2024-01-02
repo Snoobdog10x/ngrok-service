@@ -1,0 +1,16 @@
+[Unit]
+Description=ngrok-client
+After=network.target
+
+[Service]
+ExecStart=~/projects/bots/ngrok-service/start.sh
+User=duythanh
+Group=root
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
+
+[Unit]
+Wants=network-online.target
+After=network-online.target
