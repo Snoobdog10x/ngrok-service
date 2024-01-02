@@ -1,3 +1,4 @@
+#!/bin/bash
 cd /home/duythanh/projects/bots/ngrok-service
 git pull
 python3 -m venv .venv
