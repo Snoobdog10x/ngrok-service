@@ -8,7 +8,7 @@ from firebase_admin import credentials
 from firebase_admin import db
 import traceback
 
-logging.basicConfig()
+logging.basicConfig(level=logging.NOTSET)
 
 if not firebase_admin._apps:
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "cookie-netflix-48899-firebase-adminsdk-6bxuo-c48d262735.json"
