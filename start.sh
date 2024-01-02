@@ -1,4 +1,4 @@
-cd /home/duythanh/projects/bots/ngrok-service/start.sh
+cd /home/duythanh/projects/bots/ngrok-service
 git pull
 python3 -m venv .venv
 source .venv/bin/activate

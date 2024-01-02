@@ -3,7 +3,7 @@ Description=ngrok-client
 After=network.target
 
 [Service]
-ExecStart=~/projects/bots/ngrok-service/start.sh
+ExecStart=/home/duythanh/projects/bots/ngrok-service/start.sh
 User=duythanh
 Group=root
 Type=simple
