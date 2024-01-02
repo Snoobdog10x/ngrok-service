@@ -45,5 +45,5 @@ TOKEN, PORT = get_credential()
 logging.info(f"Found TOKEN: {TOKEN} and PORT: {PORT}")
 logging.info(f"Running with hostname: {socket.gethostname()}")
 listener = ngrok.forward(PORT, authtoken=TOKEN)
-update_interval = 5 * 60
+update_interval = 15 * 60
 main()
